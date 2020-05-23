@@ -1,5 +1,5 @@
 # web-scraping-challenge
-This is the repository for the web-scraping-challenge homework assignment.
+This is the repository for the Web Scraping homework assignment.
 
 All of the files related to the assignment are located in the Mission_to_mars folder.
 
