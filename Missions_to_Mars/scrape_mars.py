@@ -12,10 +12,17 @@ def init_browser():
 
 def scrape():
     # NASA Mars News
+    browser = init_browser()
+
     news_url = 'https://mars.nasa.gov/news/'
-    response = requests.get(news_url)
-    soup = bs(response.text, 'html.parser')
-    
+
+    browser.visit(news_url)
+
+    time.sleep(2)
+
+    html = browser.html
+    soup = bs(html, 'html.parser')
+
     results = soup.find_all('div', class_='slide')
 
     title_list = []
@@ -30,6 +37,8 @@ def scrape():
 
     news_title = title_list[0].strip()
     news_p = p_list[0].strip()
+
+    browser.quit()
     
     # NASA JPL Featured Image
     browser = init_browser()
@@ -39,7 +48,7 @@ def scrape():
     
     browser.visit(jpl_url)
 
-    time.sleep(1)
+    time.sleep(2)
 
     html = browser.html
     soup = bs(html, "html.parser")
@@ -83,7 +92,7 @@ def scrape():
     
     browser.visit(hemisphere_url)
 
-    time.sleep(1)
+    time.sleep(2)
 
     html = browser.html
     soup = bs(html, 'html.parser')
