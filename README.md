@@ -1,6 +1,8 @@
 # web-scraping-challenge
 This is the repository for the web-scraping-challenge homework assignment.
 
+All of the files related to the assignment are located in the Mission_to_mars folder.
+
 The repository includes the app.py file which contains the flask app, the jupyter notebook which contains all of the work done to write the python code, and the scrape_mars.py file which contains the final scraping code for the flask app.  There is a templates folder which contains the index.html file that renders the web results from the scraping app.
 
 The images folder contains all of the screenshot images of the final application.
