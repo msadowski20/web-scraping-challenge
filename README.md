@@ -5,7 +5,7 @@ The repository includes the app.py file which contains the flask app, the jupyte
 
 The images folder contains all of the screenshot images of the final application.
 
-==============================================================================================
+===================================================================================
 
 
 # Web Scraping Homework - Mission to Mars
