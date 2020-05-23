@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container-fluid">
     <div class="jumbotron text-center">
       <h1>Mars Facts</h1>
       <p>Get facts about Mars along with current news articles and weather data.</p>
@@ -18,19 +18,23 @@
     </div>
   </div>
   
-  <div class="container">
+  <div class="container-fluid">
+    
     <div class="row">
       <h1>Latest Mars News</h1>
-      <h2>{{ mars_facts.News_Title }}</h2>
+      <h3>{{ mars_facts.News_Title }}</h3>
       <p>{{ mars_facts.News_Paragraph }}</p>
     </div>
+    
     <div class="row">
-      <div class="col col-lg-8">
+
+      <div class="col col-lg-9">
         <h1>Featured Mars Image</h1>
         <img src="{{ mars_facts.Featured_Image }}" alt="Featured Mars Image">
       </div>
+      
       <div class="column"></div>
-      <div class="col col-lg-4">
+      <div class="col col-lg-3">
         <div class="card" style="width: 20rem;">
           <div class="card-body">
             <h4 class="card-title">Mars Weather</h4>
@@ -38,24 +42,26 @@
           </div>
         </div>
         <hr>
-        {{ mars_facts.Mars_Facts }}
+        <h4>Mars Facts</h4>
+        <p>{{ mars_facts.Mars_Facts | safe }}</p>
       </div>
       </div>
+
     </div>
+    
     <div class="row">
-      <h1> Mars Hemispheres</h1>
+      <h1><center>Mars Hemispheres</center></h1>
       <hr>
-      <div class="column">
-        <div class="col col-lg-4">
-          <img src="{{ mars_facts.Mars_Hemispheres[0] }}" alt="Featured Mars Image">
-          <img src="{{ mars_facts.Mars_Hemispheres[1] }}" alt="Featured Mars Image">
-        </div>
-        <div class="col col-lg-4">
-          <img src="{{ mars_facts.Mars_Hemispheres[2] }}" alt="Featured Mars Image">
-          <img src="{{ mars_facts.Mars_Hemispheres[3] }}" alt="Featured Mars Image">
+      {% for hemisphere in mars_facts.Mars_Hemispheres %}
+      <div class="col-lg-6">
+        <div class="thumbnail">
+          <img src="{{hemisphere.image_url}}">
+          <h3>{{hemisphere.title}}</h3>
         </div>
       </div>
+      {% endfor %}
     </div>
+         
   </div>
 </body>
 
