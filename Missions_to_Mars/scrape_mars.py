@@ -14,7 +14,7 @@ def scrape():
     # NASA Mars News
     news_url = 'https://mars.nasa.gov/news/'
     response = requests.get(news_url)
-    soup = BeautifulSoup(response.text, 'html.parser')
+    soup = bs(response.text, 'html.parser')
     
     results = soup.find_all('div', class_='slide')
 
@@ -54,7 +54,7 @@ def scrape():
     # Mars Weather
     twitter_url = 'https://twitter.com/marswxreport?lang=en'
     response = requests.get(twitter_url)
-    soup = BeautifulSoup(response.text, 'html.parser')
+    soup = bs(response.text, 'html.parser')
 
     results = soup.find_all('div', class_='tweet')
     
@@ -71,6 +71,10 @@ def scrape():
     facts_url = 'https://space-facts.com/mars/'
     tables = pd.read_html(facts_url)
     df = tables[2]
+    df = df.rename(columns={0: 'description', 1: 'value'})
+    df = df.set_index('description')
+    table_html = df.to_html()
+    table_html = table_html.replace('\n', '')
 
     # Mars Hemispheres
     browser = init_browser()
@@ -82,7 +86,7 @@ def scrape():
     time.sleep(1)
 
     html = browser.html
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = bs(html, 'html.parser')
 
     results = soup.find_all('div', class_='item')
 
@@ -96,7 +100,7 @@ def scrape():
         browser.visit(hemisphere_base_url + partial_image_url)
 
         image_html = browser.html
-        soup = BeautifulSoup(image_html, 'html.parser')
+        soup = bs(image_html, 'html.parser')
         image_url = hemisphere_base_url + \
             soup.find('img', class_='wide-image')['src']
 
@@ -110,7 +114,7 @@ def scrape():
         "News_Paragraph": news_p,
         "Featured_Image": featured_image_url,
         "Mars_Weather": mars_weather,
-        "Mars_Facts": df,
+        "Mars_Facts": table_html,
         "Mars_Hemispheres": image_url_dict
     }
 
